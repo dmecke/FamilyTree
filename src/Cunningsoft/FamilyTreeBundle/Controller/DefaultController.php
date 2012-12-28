@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends BaseController
 {
@@ -24,19 +25,16 @@ class DefaultController extends BaseController
     }
 
     /**
-     * @param int $childId
-     * @param Request $request
+     * @param Person $child
      *
      * @return RedirectResponse
      *
-     * @Route("/addFather/{childId}", name="addFather")
+     * @Route("/addFather/{id}", name="addFather")
      */
-    public function addFatherAction($childId, Request $request)
+    public function addFatherAction(Person $child)
     {
         $person = new Person();
-        $person->setFirstname($request->get('firstname'));
-        $person->setLastname($request->get('lastname'));
-        $this->findPersonById($childId)->setFather($person);
+        $child->setFather($person);
         $this->getEntityManager()->persist($person);
         $this->getEntityManager()->flush();
 
@@ -44,22 +42,44 @@ class DefaultController extends BaseController
     }
 
     /**
-     * @param int $childId
-     * @param Request $request
+     * @param Person $child
      *
      * @return RedirectResponse
      *
-     * @Route("/addMother/{childId}", name="addMother")
+     * @Route("/addMother/{id}", name="addMother")
      */
-    public function addMotherAction($childId, Request $request)
+    public function addMotherAction(Person $child)
     {
         $person = new Person();
-        $person->setFirstname($request->get('firstname'));
-        $person->setLastname($request->get('lastname'));
-        $this->findPersonById($childId)->setMother($person);
+        $child->setMother($person);
         $this->getEntityManager()->persist($person);
         $this->getEntityManager()->flush();
 
         return $this->redirect($this->generateUrl('tree'));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/edit", name="edit")
+     */
+    public function editAction(Request $request)
+    {
+        list($field, $id) = explode('_', $request->get('id'));
+        $setter = 'set' . ucfirst($field);
+
+        if (in_array($field, array('dateOfBirth', 'dateOfDeath'))) {
+            $value = new \DateTime($request->get('value'));
+        } else {
+            $value = $request->get('value');
+        }
+
+        $person = $this->findPersonById($id);
+        $person->$setter($value);
+        $this->getEntityManager()->flush();
+
+        return new Response($request->get('value'));
     }
 }

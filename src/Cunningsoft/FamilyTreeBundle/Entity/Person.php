@@ -151,8 +151,16 @@ class Person
     /**
      * @param \DateTime $dateOfBirth
      */
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth(\DateTime $dateOfBirth)
     {
         $this->dateOfBirth = $dateOfBirth;
+    }
+
+    /**
+     * @param \DateTime $dateOfDeath
+     */
+    public function setDateOfDeath(\DateTime $dateOfDeath)
+    {
+        $this->dateOfDeath = $dateOfDeath;
     }
 }

@@ -1,7 +1,7 @@
 <div class="person">
-    <h1>{{ person.firstname }} {{ person.lastname }}</h1>
-    <div class="dateOfBirth">* {% if person.dateOfBirth %}{{ person.dateOfBirth|date('d.m.Y') }}{% else %}<span class="unknown">unknown</span>{% endif %}</div>
-    <div class="dateOfDeath">&dagger; {% if person.dateOfDeath %}{{ person.dateOfDeath|date('d.m.Y') }}{% else %}<span class="unknown">unknown</span>{% endif %}</div>
+    <h1><span class="editable{% if not person.firstname %} unknown{% endif %}" id="firstname_{{ person.id }}">{{ person.firstname|default('unknown') }}</span> <span class="editable{% if not person.lastname %} unknown{% endif %}" id="lastname_{{ person.id }}">{{ person.lastname|default('unknown') }}</span></h1>
+    <div class="dateOfBirth">* <span id="dateOfBirth_{{ person.id }}" class="editable{% if not person.dateOfBirth %} unknown{% endif %}">{% if person.dateOfBirth %}{{ person.dateOfBirth|date('d.m.Y') }}{% else %}unknown{% endif %}</span></div>
+    <div class="dateOfDeath">&dagger; <span id="dateOfDeath_{{ person.id }}" class="editable{% if not person.dateOfDeath %} unknown{% endif %}">{% if person.dateOfDeath %}{{ person.dateOfDeath|date('d.m.Y') }}{% else %}unknown{% endif %}</span></div>
 </div>
 
 <div class="parents">
@@ -9,19 +9,7 @@
 {% if person.father %}
 {% include 'FamilyTreeBundle:Default:person.html.twig' with { 'person': person.father } %}
 {% else %}
-        <div class="person">
-            <form action="{{ path('addFather', { 'childId': person.id }) }}">
-                <div>
-                    <label for="firstname_father_{{ person.id }}">Firstname</label>
-                    <input type="text" id="firstname_father_{{ person.id }}" name="firstname" />
-                </div>
-                <div>
-                    <label for="lastname_father_{{ person.id }}">Lastname</label>
-                    <input type="text" id="lastname_father_{{ person.id }}" name="lastname" />
-                </div>
-                <input type="submit" value="add father" />
-            </form>
-        </div>
+        <a href="{{ path('addFather', { 'id': person.id }) }}" class="btn">add father</a>
 {% endif %}
     </div>
 
@@ -29,19 +17,14 @@
 {% if person.mother %}
 {% include 'FamilyTreeBundle:Default:person.html.twig' with { 'person': person.mother } %}
 {% else %}
-        <div class="person">
-            <form action="{{ path('addMother', { 'childId': person.id }) }}">
-                <div>
-                    <label for="firstname_mother_{{ person.id }}">Firstname</label>
-                    <input type="text" id="firstname_mother_{{ person.id }}" name="firstname" />
-                </div>
-                <div>
-                    <label for="lastname_mother_{{ person.id }}">Lastname</label>
-                    <input type="text" id="lastname_mother_{{ person.id }}" name="lastname" />
-                </div>
-                <input type="submit" value="add mother" />
-            </form>
-        </div>
+        <a href="{{ path('addMother', { 'id': person.id }) }}" class="btn btn-add">add mother</a>
 {% endif %}
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.editable').editable('{{ path('edit') }}', {
+        onblur: 'submit'
+    });
+});
+</script>
