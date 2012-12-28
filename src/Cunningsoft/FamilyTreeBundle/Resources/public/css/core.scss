@@ -1,0 +1,47 @@
+.father {
+    width: 40%;
+    float: left;
+}
+.mother {
+    width: 40%;
+    float: right;
+}
+
+.person {
+    border: 1px solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.person {
+    h1 {
+        font-size: 50px;
+    }
+}
+.parents {
+    .person {
+        h1 {
+            font-size: 40px;
+        }
+    }
+}
+.parents {
+    .parents {
+        .person {
+            h1 {
+                font-size: 30px;
+            }
+        }
+    }
+}
+.parents {
+    .parents {
+        .parents {
+            .person {
+                h1 {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}

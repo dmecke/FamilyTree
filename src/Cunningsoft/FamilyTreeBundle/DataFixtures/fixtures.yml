@@ -1,0 +1,4 @@
+Cunningsoft\FamilyTreeBundle\Entity\Person:
+    person1:
+        firstname: Daniel
+        lastname: Mecke

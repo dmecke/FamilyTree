@@ -1,0 +1,7 @@
+{% extends 'FamilyTreeBundle::layout.html.twig' %}
+
+{% block content %}
+
+{% include 'FamilyTreeBundle:Default:person.html.twig' with { 'person': rootPerson } %}
+
+{% endblock %}

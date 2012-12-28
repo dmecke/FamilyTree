@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Family Tree{% endblock %}</title>
+{% block stylesheets %}
+    {% stylesheets '@FamilyTreeBundle/Resources/public/css/*.scss' output='css/familytree.css' filter='?yui_css,compass' %}
+    <link href="{{ asset_url }}" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+{% javascripts '@FamilyTreeBundle/Resources/public/js/jquery/*.js' output='js/jquery.js' filter='?yui_js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% javascripts '@FamilyTreeBundle/Resources/public/js/*.js' output='js/familytree.js' filter='?yui_js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}
+            <a href="https://github.com/dmecke/FamilyTree"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+            <div class="">
+                {% block content %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

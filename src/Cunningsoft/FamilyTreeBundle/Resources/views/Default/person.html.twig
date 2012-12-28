@@ -1,0 +1,45 @@
+<div class="person">
+    <h1>{{ person.firstname }} {{ person.lastname }}</h1>
+</div>
+
+<div class="parents">
+    <div class="father">
+{% if person.father %}
+{% include 'FamilyTreeBundle:Default:person.html.twig' with { 'person': person.father } %}
+{% else %}
+        <div class="person">
+            <form action="{{ path('addFather', { 'childId': person.id }) }}">
+                <div>
+                    <label for="firstname_father_{{ person.id }}">Firstname</label>
+                    <input type="text" id="firstname_father_{{ person.id }}" name="firstname" />
+                </div>
+                <div>
+                    <label for="lastname_father_{{ person.id }}">Lastname</label>
+                    <input type="text" id="lastname_father_{{ person.id }}" name="lastname" />
+                </div>
+                <input type="submit" value="add father" />
+            </form>
+        </div>
+{% endif %}
+    </div>
+
+    <div class="mother">
+{% if person.mother %}
+{% include 'FamilyTreeBundle:Default:person.html.twig' with { 'person': person.mother } %}
+{% else %}
+        <div class="person">
+            <form action="{{ path('addMother', { 'childId': person.id }) }}">
+                <div>
+                    <label for="firstname_mother_{{ person.id }}">Firstname</label>
+                    <input type="text" id="firstname_mother_{{ person.id }}" name="firstname" />
+                </div>
+                <div>
+                    <label for="lastname_mother_{{ person.id }}">Lastname</label>
+                    <input type="text" id="lastname_mother_{{ person.id }}" name="lastname" />
+                </div>
+                <input type="submit" value="add mother" />
+            </form>
+        </div>
+{% endif %}
+    </div>
+</div>
