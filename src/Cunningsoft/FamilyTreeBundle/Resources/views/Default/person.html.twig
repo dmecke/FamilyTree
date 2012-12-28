@@ -1,5 +1,7 @@
 <div class="person">
     <h1>{{ person.firstname }} {{ person.lastname }}</h1>
+    <div class="dateOfBirth">* {% if person.dateOfBirth %}{{ person.dateOfBirth|date('d.m.Y') }}{% else %}<span class="unknown">unknown</span>{% endif %}</div>
+    <div class="dateOfDeath">&dagger; {% if person.dateOfDeath %}{{ person.dateOfDeath|date('d.m.Y') }}{% else %}<span class="unknown">unknown</span>{% endif %}</div>
 </div>
 
 <div class="parents">

@@ -49,14 +49,14 @@ class Person
     /**
      * @var Person
      *
-     * @ORM\ManyToOne(targetEntity="Person")
+     * @ORM\ManyToOne(targetEntity="Person", fetch="EAGER")
      */
     private $father;
 
     /**
      * @var Person
      *
-     * @ORM\ManyToOne(targetEntity="Person")
+     * @ORM\ManyToOne(targetEntity="Person", fetch="EAGER")
      */
     private $mother;
 
