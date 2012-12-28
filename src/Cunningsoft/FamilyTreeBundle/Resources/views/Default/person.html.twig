@@ -9,7 +9,7 @@
 {% if person.father %}
 {% include 'FamilyTreeBundle:Default:person.html.twig' with { 'person': person.father } %}
 {% else %}
-        <a href="{{ path('addFather', { 'id': person.id }) }}" class="btn">add father</a>
+        <a href="{{ path('addFather', { 'id': person.id }) }}" class="btn btn-add">add father</a>
 {% endif %}
     </div>
 

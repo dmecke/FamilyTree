@@ -67,7 +67,7 @@ html, body {
         }
     }
     padding: 14px;
-    width: 50%;
+    width: 70%;
     background: white;
     margin: 40px auto;
     position: relative;
@@ -92,6 +92,7 @@ html, body {
 }
 .parents {
     .person {
+        text-align: left;
         h1 {
             font-size: 40px;
         }
@@ -99,12 +100,13 @@ html, body {
             font-size: 20px;
         }
     }
+    text-align: center;
 }
 .parents {
     .parents {
         .person {
             h1 {
-                font-size: 30px;
+                font-size: 26px;
             }
             div {
                 font-size: 16px;

@@ -20,7 +20,7 @@ class DefaultController extends BaseController
     public function treeAction()
     {
         return array(
-            'rootPerson' => $this->getEntityManager()->getRepository('FamilyTreeBundle:Person')->findOneBy(array('firstname' => 'Daniel', 'lastname' => 'Mecke')),
+            'rootPerson' => $this->getEntityManager()->getRepository('FamilyTreeBundle:Person')->find(1),
         );
     }
 
